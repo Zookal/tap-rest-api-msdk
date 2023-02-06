@@ -25,6 +25,7 @@ class DynamicStream(RestApiStream):
         replication_key: str = None,
         except_keys: list = None,
         next_page_token_path: str = None,
+        next_page_token_name: str = None,
         schema: dict = None,
         pagination_request_style: str = "default",
         pagination_response_style: str = "default",
@@ -47,6 +48,7 @@ class DynamicStream(RestApiStream):
             except_keys: see tap.py
             records_path: see tap.py
             next_page_token_path: see tap.py
+            next_page_token_name: see tap.py
             schema: the json schema for the stream.
             pagination_request_style: see tap.py
             pagination_response_style: see tap.py
@@ -72,6 +74,7 @@ class DynamicStream(RestApiStream):
         self.next_page_token_jsonpath = (
             next_page_token_path  # Or override `get_next_page_token`.
         )
+        self.next_page_token_name = next_page_token_name
         self.pagination_page_size = pagination_page_size
         get_url_params_styles = {"style1": self._get_url_params_style1,
                                  "hateoas_body": self._get_url_params_hateoas_body}
@@ -220,7 +223,7 @@ class DynamicStream(RestApiStream):
             for k, v in self.params.items():
                 params[k] = v
         if next_page_token:
-            params["page"] = next_page_token
+            params[self.next_page_token_name] = next_page_token
         if self.replication_key:
             params["sort"] = "asc"
             params["order_by"] = self.replication_key

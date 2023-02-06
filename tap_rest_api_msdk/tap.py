@@ -310,6 +310,13 @@ class TapRestApiMsdk(Tap):
             "token. Defaults to `$.next_page`",
         ),
         th.Property(
+            "next_page_token_name",
+            th.StringType,
+            default="page",
+            required=False,
+            description="The attribute name of the next page token",
+        ),
+        th.Property(
             "pagination_request_style",
             th.StringType,
             default="default",
@@ -444,6 +451,7 @@ class TapRestApiMsdk(Tap):
                     replication_key=replication_key,
                     except_keys=except_keys,
                     next_page_token_path=self.config["next_page_token_path"],
+                    next_page_token_name=self.config["next_page_token_name"],
                     pagination_request_style=self.config["pagination_request_style"],
                     pagination_response_style=self.config["pagination_response_style"],
                     pagination_page_size=self.config.get("pagination_page_size"),
