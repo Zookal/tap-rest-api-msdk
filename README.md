@@ -125,6 +125,7 @@ provided at the top-level will be the default values for each stream.:
 - `pagination_response_style`: optional: style of pagination results, defaults to `default`, see Pagination below.
 - `pagination_page_size`: optional: limit for size of page, defaults to None.
 - `next_page_token_path`: optional: a jsonpath string representing the path to the "next page" token. Defaults to `$.next_page`.
+- `next_page_token_name`: optional: the attribute name of the next page token. Defaults to `page`.
 - `streams`: required: a list of objects that contain the configuration of each stream. See stream-level params below.
 - `path`: optional: see stream-level params below.
 - `params`: optional: see stream-level params below.
